@@ -1,990 +1,939 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Benjamin Muhoya | DJ & Events</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Syncopate:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Benjamin Muhoya — DJ & Events</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syncopate:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --red:#d93a1a;
+  --amber:#f0a500;
+  --deep:#080503;
+  --surface:#0f0b07;
+  --panel:#161009;
+  --card:#1c1410;
+  --border:rgba(240,165,0,.15);
+  --border2:rgba(217,58,26,.2);
+  --glow-r:rgba(217,58,26,.5);
+  --glow-a:rgba(240,165,0,.4);
+  --text:#ede8e0;
+  --muted:#6b6058;
+  --muted2:#9a8f83;
+  --ok:#e8b14a;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  background:var(--deep);
+  color:var(--text);
+  font-family:'Cormorant Garamond',serif;
+  font-weight:300;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body::after{
+  content:'';
+  position:fixed;inset:0;z-index:9000;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity:.6;
+}
 
-    :root {
-      --red:    #e8391a;
-      --amber:  #f5a623;
-      --deep:   #0a0604;
-      --surface:#111009;
-      --panel:  #1a1510;
-      --border: rgba(245,166,35,0.18);
-      --glow-r: rgba(232,57,26,0.55);
-      --glow-a: rgba(245,166,35,0.45);
-      --text:   #f0ebe3;
-      --muted:  #7a6f62;
-    }
+/* NAV */
+nav{
+  position:fixed;top:0;width:100%;z-index:500;
+  padding:env(safe-area-inset-top,0) 0 0;
+  background:linear-gradient(to bottom,rgba(8,5,3,.97) 0%,transparent 100%);
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px;
+}
+.nav-logo{
+  font-family:'Syncopate',sans-serif;
+  font-weight:700;font-size:12px;letter-spacing:.2em;
+  color:var(--text);text-decoration:none;
+}
+.nav-logo em{color:var(--red);font-style:normal;}
+.nav-book{
+  font-family:'Syncopate',sans-serif;
+  font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  padding:9px 20px;
+  border:1px solid var(--red);
+  color:var(--red);text-decoration:none;
+  transition:background .2s,color .2s,box-shadow .2s;
+}
+.nav-book:hover,.nav-book:active{background:var(--red);color:#fff;box-shadow:0 0 20px var(--glow-r);}
 
-    html { scroll-behavior: smooth; }
+/* HERO */
+#hero{
+  min-height:100svh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 24px clamp(60px,12vh,100px);
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to top,rgba(8,5,3,1) 0%,rgba(8,5,3,.6) 40%,rgba(8,5,3,.1) 100%),
+    radial-gradient(ellipse at 65% 35%,rgba(217,58,26,.38) 0%,rgba(240,165,0,.1) 45%,transparent 70%),
+    radial-gradient(ellipse at 20% 70%,rgba(217,58,26,.12) 0%,transparent 50%),
+    #0f0b07;
+}
+.hero-rings{
+  position:absolute;
+  right:-100px;top:50%;transform:translateY(-50%);
+  width:500px;height:500px;
+  pointer-events:none;
+}
+.hr{
+  position:absolute;border-radius:50%;border:1px solid;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+}
+.hr:nth-child(1){width:100px;height:100px;border-color:rgba(217,58,26,.6);animation:rspin 5s linear infinite;}
+.hr:nth-child(2){width:190px;height:190px;border-color:rgba(217,58,26,.25);animation:rspin 9s linear infinite reverse;}
+.hr:nth-child(3){width:300px;height:300px;border-color:rgba(240,165,0,.13);animation:rspin 14s linear infinite;}
+.hr:nth-child(4){width:420px;height:420px;border-color:rgba(240,165,0,.07);animation:rspin 20s linear infinite reverse;}
+.hr-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 14px var(--glow-r);top:50%;left:-4px;transform:translateY(-50%);}
+@keyframes rspin{to{transform:translate(-50%,-50%) rotate(360deg);}}
 
-    body {
-      background: var(--deep);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      cursor: none;
-      overflow-x: hidden;
-    }
+.hero-content{position:relative;z-index:2;}
+.hero-tag{
+  font-family:'Syncopate',sans-serif;
+  font-size:9px;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--amber);
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:20px;opacity:0;
+  animation:fadeup .8s .2s forwards;
+}
+.hero-tag::before{content:'';display:block;width:28px;height:1px;background:var(--amber);}
+h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(72px,20vw,180px);
+  line-height:.88;letter-spacing:.02em;
+  opacity:0;animation:fadeup .9s .35s forwards;
+}
+h1 .r{color:var(--red);}
+.hero-sub{
+  margin-top:22px;
+  font-size:clamp(16px,4vw,20px);
+  font-style:italic;line-height:1.6;
+  color:var(--muted2);max-width:380px;
+  opacity:0;animation:fadeup .9s .5s forwards;
+}
+.hero-cta{
+  margin-top:36px;
+  display:flex;flex-wrap:wrap;gap:14px;
+  opacity:0;animation:fadeup .9s .65s forwards;
+}
+.btn-fire{
+  font-family:'Syncopate',sans-serif;
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  padding:15px 32px;
+  background:var(--red);color:#fff;
+  text-decoration:none;border:none;cursor:pointer;
+  transition:box-shadow .3s,transform .2s,opacity .2s;
+  -webkit-tap-highlight-color:transparent;display:inline-block;
+}
+.btn-fire:active{transform:scale(.97);}
+.btn-fire:hover{box-shadow:0 0 32px var(--glow-r),0 0 64px rgba(217,58,26,.15);}
+.btn-fire:disabled,.btn-next:disabled{opacity:.55;cursor:wait;box-shadow:none;}
+.btn-outline{
+  font-family:'Syncopate',sans-serif;
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  padding:15px 32px;
+  border:1px solid var(--border);
+  color:var(--text);text-decoration:none;cursor:pointer;
+  transition:border-color .25s,color .25s;
+  -webkit-tap-highlight-color:transparent;display:inline-block;
+}
+.btn-outline:hover{border-color:var(--amber);color:var(--amber);}
+@keyframes fadeup{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
 
-    /* ── CUSTOM CURSOR ─────────────────────────────── */
-    #cursor {
-      width: 12px; height: 12px;
-      background: var(--red);
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none; z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform .12s ease, background .2s;
-      mix-blend-mode: screen;
-    }
-    #cursor-ring {
-      width: 36px; height: 36px;
-      border: 1px solid rgba(245,166,35,0.6);
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none; z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: transform .35s cubic-bezier(.23,1,.32,1), opacity .2s;
-    }
+/* MARQUEE */
+.marquee{
+  padding:20px 0;overflow:hidden;white-space:nowrap;
+  background:linear-gradient(90deg,var(--red),#b02d12,var(--red));
+  background-size:200%;animation:gradshift 4s ease infinite;
+}
+@keyframes gradshift{0%,100%{background-position:0%;}50%{background-position:100%;}}
+.marquee-track{display:inline-flex;animation:mq 20s linear infinite;}
+.marquee-track span{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.15em;padding:0 28px;color:rgba(255,255,255,.92);}
+.marquee-track .dot{color:rgba(255,255,255,.4);}
+@keyframes mq{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-    /* ── NOISE OVERLAY ─────────────────────────────── */
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none; opacity: .55;
-    }
+/* SHARED */
+section{position:relative;z-index:1;}
+.sec-pad{padding:80px 24px;}
+.sec-label{
+  font-family:'Syncopate',sans-serif;
+  font-size:8px;letter-spacing:.4em;text-transform:uppercase;
+  color:var(--red);margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.sec-label::before{content:'';display:block;width:24px;height:1px;background:var(--red);}
+h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,10vw,88px);line-height:.92;letter-spacing:.02em;}
+h2 .r{color:var(--red);}
 
-    /* ── NAV ───────────────────────────────────────── */
-    nav {
-      position: fixed; top: 0; width: 100%; z-index: 100;
-      padding: 28px 60px;
-      display: flex; align-items: center; justify-content: space-between;
-      background: linear-gradient(to bottom, rgba(10,6,4,.95) 0%, transparent 100%);
-    }
-    .nav-logo {
-      font-family: 'Syncopate', sans-serif;
-      font-weight: 700; font-size: 13px;
-      letter-spacing: .18em; text-transform: uppercase;
-      color: var(--text);
-      text-decoration: none;
-    }
-    .nav-logo span { color: var(--red); }
-    .nav-links { display: flex; gap: 40px; list-style: none; }
-    .nav-links a {
-      font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
-      color: var(--muted); text-decoration: none;
-      transition: color .25s;
-    }
-    .nav-links a:hover { color: var(--amber); }
-    .nav-cta {
-      font-family: 'Syncopate', sans-serif;
-      font-size: 10px; letter-spacing: .2em;
-      padding: 10px 24px;
-      border: 1px solid var(--red);
-      color: var(--red);
-      text-decoration: none; text-transform: uppercase;
-      transition: background .25s, color .25s, box-shadow .25s;
-    }
-    .nav-cta:hover {
-      background: var(--red); color: #fff;
-      box-shadow: 0 0 24px var(--glow-r);
-    }
+/* ABOUT */
+#about{background:var(--surface);}
+.about-grid{display:grid;gap:48px;}
+.about-visual{position:relative;aspect-ratio:4/3;background:var(--panel);overflow:hidden;}
+.about-visual::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 60% 40%,rgba(217,58,26,.3) 0%,transparent 60%),
+             radial-gradient(ellipse at 20% 80%,rgba(240,165,0,.15) 0%,transparent 50%);
+}
+.platter-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+.platter{
+  width:clamp(160px,40vw,220px);height:clamp(160px,40vw,220px);
+  border-radius:50%;
+  background:radial-gradient(circle at 40% 35%,#2a1a0e,#080503);
+  border:1px solid rgba(217,58,26,.3);
+  position:relative;
+  animation:rspin 8s linear infinite;
+  box-shadow:0 0 60px rgba(217,58,26,.2),inset 0 0 40px rgba(0,0,0,.8);
+}
+.platter::before{content:'';position:absolute;inset:20%;border-radius:50%;border:1px solid rgba(217,58,26,.2);}
+.platter::after{content:'';position:absolute;width:14px;height:14px;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--red);box-shadow:0 0 20px var(--glow-r);}
+.groove{position:absolute;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.04);}
+.about-text h2{margin-bottom:20px;}
+.about-text p{font-size:clamp(16px,4vw,18px);line-height:1.75;color:var(--muted2);margin-bottom:16px;}
+.about-text p strong{color:var(--text);font-weight:400;}
+.stat-row{display:flex;gap:32px;flex-wrap:wrap;margin-top:28px;padding-top:28px;border-top:1px solid var(--border);}
+.stat-n{font-family:'Bebas Neue',sans-serif;font-size:44px;line-height:1;color:var(--text);}
+.stat-n em{color:var(--red);font-style:normal;}
+.stat-l{font-family:'Syncopate',sans-serif;font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-top:2px;}
 
-    /* ── HERO ──────────────────────────────────────── */
-    #hero {
-      position: relative; height: 100vh;
-      display: flex; align-items: flex-end; justify-content: flex-start;
-      padding: 0 60px 80px;
-      overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        linear-gradient(160deg, rgba(10,6,4,0) 30%, rgba(10,6,4,.92) 100%),
-        linear-gradient(to top, rgba(10,6,4,1) 0%, rgba(10,6,4,.2) 50%, transparent 100%),
-        radial-gradient(ellipse at 60% 40%, rgba(232,57,26,.45) 0%, rgba(245,166,35,.15) 40%, #0a0604 75%);
-      /* To use your own photo: upload it to GitHub and change the last line to:  url('bg.jpg') center/cover no-repeat */
-    }
-    .hero-bg::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(160deg, rgba(232,57,26,.08) 0%, rgba(245,166,35,.04) 100%);
-    }
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-top:48px;}
+.svc-card{
+  background:var(--card);
+  padding:clamp(24px,6vw,36px) clamp(20px,5vw,28px);
+  border-top:2px solid transparent;
+  transition:border-color .3s,background .3s;
+  position:relative;overflow:hidden;
+  -webkit-tap-highlight-color:transparent;
+}
+.svc-card:active,.svc-card:hover{border-color:var(--red);background:#201510;}
+.svc-num{font-family:'Bebas Neue',sans-serif;font-size:56px;color:rgba(217,58,26,.07);position:absolute;top:8px;right:12px;line-height:1;}
+.svc-icon{font-size:24px;margin-bottom:14px;}
+.svc-card h3{font-family:'Syncopate',sans-serif;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--text);margin-bottom:10px;}
+.svc-card p{font-size:13px;line-height:1.65;color:var(--muted);}
 
-    /* Animated scan line */
-    .scanline {
-      position: absolute; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(232,57,26,.4), transparent);
-      animation: scan 4s linear infinite;
-      pointer-events: none;
-    }
-    @keyframes scan {
-      0%   { top: -2px; opacity: 0; }
-      5%   { opacity: 1; }
-      95%  { opacity: 1; }
-      100% { top: 100%; opacity: 0; }
-    }
+/* LOCATIONS */
+#locations{background:var(--surface);}
+.loc-list{display:flex;flex-direction:column;gap:10px;margin-top:48px;}
+.loc-item{
+  background:linear-gradient(180deg,rgba(28,20,16,.96),rgba(22,16,9,.96));
+  padding:24px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-left:2px solid transparent;
+  border:1px solid rgba(240,165,0,.08);
+  transition:border-color .25s,background .25s,transform .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.loc-item:hover,.loc-item:active{border-color:var(--amber);background:#1a1608;transform:translateY(-1px);}
+.loc-copy{display:flex;flex-direction:column;gap:7px;}
+.loc-city{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,7vw,44px);line-height:1;color:var(--text);}
+.loc-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.loc-state{font-family:'Syncopate',sans-serif;font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);}
+.loc-badge{
+  font-family:'Syncopate',sans-serif;font-size:7px;letter-spacing:.28em;text-transform:uppercase;
+  padding:7px 10px;border:1px solid var(--border);color:var(--muted2);
+  background:rgba(255,255,255,.02);
+}
+.loc-dot{
+  width:10px;height:10px;border-radius:50%;background:rgba(240,165,0,.28);flex-shrink:0;
+  box-shadow:0 0 0 rgba(240,165,0,0);
+}
+.loc-item.active-city{
+  border-color:rgba(240,165,0,.32);
+  box-shadow:inset 0 0 0 1px rgba(240,165,0,.06),0 0 24px rgba(240,165,0,.08);
+}
+.loc-item.active-city .loc-badge{
+  border-color:rgba(240,165,0,.3);
+  color:var(--ok);
+  background:rgba(240,165,0,.08);
+}
+.loc-item.active-city .loc-dot{
+  background:var(--amber);
+  box-shadow:0 0 14px var(--glow-a);
+  animation:pulse 2s ease-in-out infinite;
+}
+.loc-item.pending-city{
+  opacity:.8;
+}
+.loc-item.pending-city .loc-state{color:var(--muted2);}
+.loc-item.pending-city .loc-badge{
+  border-color:rgba(217,58,26,.14);
+  color:#b7aba0;
+}
+.loc-item.pending-city .loc-dot{
+  background:rgba(154,143,131,.35);
+}
+@keyframes pulse{0%,100%{box-shadow:0 0 8px var(--glow-a);}50%{box-shadow:0 0 22px var(--glow-a);}}
 
-    .hero-content { position: relative; z-index: 2; max-width: 780px; }
-    .hero-eyebrow {
-      font-family: 'Syncopate', sans-serif;
-      font-size: 10px; letter-spacing: .35em; text-transform: uppercase;
-      color: var(--amber); margin-bottom: 18px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .hero-eyebrow::before {
-      content: ''; display: block;
-      width: 40px; height: 1px; background: var(--amber);
-    }
-    h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(80px, 12vw, 160px);
-      line-height: .92; letter-spacing: .01em;
-      text-transform: uppercase;
-    }
-    h1 .line-red { color: var(--red); display: block; }
-    h1 .line-white { color: var(--text); display: block; }
-    .hero-sub {
-      margin-top: 28px; max-width: 420px;
-      font-size: 15px; line-height: 1.65; color: var(--muted);
-      font-weight: 300;
-    }
-    .hero-actions {
-      margin-top: 40px; display: flex; gap: 20px; align-items: center;
-    }
-    .btn-primary {
-      font-family: 'Syncopate', sans-serif;
-      font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
-      padding: 16px 36px;
-      background: var(--red); color: #fff;
-      text-decoration: none; border: none; cursor: none;
-      transition: box-shadow .3s, transform .2s;
-      display: inline-block;
-    }
-    .btn-primary:hover {
-      box-shadow: 0 0 40px var(--glow-r), 0 0 80px rgba(232,57,26,.2);
-      transform: translateY(-2px);
-    }
-    .btn-ghost {
-      font-family: 'Syncopate', sans-serif;
-      font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
-      padding: 16px 36px;
-      border: 1px solid var(--border);
-      color: var(--text); text-decoration: none; cursor: none;
-      transition: border-color .3s, color .3s;
-    }
-    .btn-ghost:hover { border-color: var(--amber); color: var(--amber); }
+/* BOOKING */
+#booking{padding:80px 24px;padding-bottom:calc(80px + env(safe-area-inset-bottom,0));}
+.booking-header{margin-bottom:48px;}
+.booking-header p{font-size:clamp(17px,4vw,20px);font-style:italic;color:var(--muted2);margin-top:14px;line-height:1.6;max-width:500px;}
+.booking-note{
+  margin-top:20px;
+  padding:14px 16px;
+  border:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(28,20,16,.75),rgba(15,11,7,.75));
+  color:var(--muted2);
+  font-size:15px;
+  line-height:1.55;
+  max-width:620px;
+}
+.booking-note strong{color:var(--text);font-weight:400;}
+.steps-bar{display:flex;gap:8px;margin-bottom:40px;}
+.step-pip{flex:1;height:2px;background:var(--border);transition:background .4s;}
+.step-pip.active{background:var(--red);}
+.step-pip.done{background:var(--amber);}
+.step-panel{display:none;animation:fadeup .5s forwards;}
+.step-panel.active{display:block;}
+.step-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,8vw,52px);line-height:1;margin-bottom:28px;color:var(--text);}
+.step-title em{color:var(--red);font-style:normal;}
 
-    /* Floating stats */
-    .hero-stats {
-      position: absolute; right: 60px; bottom: 80px; z-index: 2;
-      display: flex; flex-direction: column; gap: 24px; align-items: flex-end;
-    }
-    .stat-item { text-align: right; }
-    .stat-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 48px; line-height: 1;
-      color: var(--text);
-    }
-    .stat-num span { color: var(--red); }
-    .stat-label {
-      font-size: 9px; letter-spacing: .3em; text-transform: uppercase;
-      color: var(--muted); margin-top: 2px;
-    }
+.event-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.event-card{
+  background:var(--card);border:1px solid var(--border);
+  padding:20px 16px;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  cursor:pointer;
+  transition:border-color .25s,background .25s,transform .15s,box-shadow .2s;
+  -webkit-tap-highlight-color:transparent;user-select:none;
+}
+.event-card:active{transform:scale(.97);}
+.event-card.selected{border-color:var(--red);background:#201410;box-shadow:0 0 0 1px rgba(217,58,26,.1);}
+.event-card:hover{border-color:rgba(217,58,26,.5);}
+.event-emoji{font-size:28px;line-height:1;}
+.event-label{font-family:'Syncopate',sans-serif;font-size:8.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted2);text-align:center;}
+.event-card.selected .event-label{color:var(--text);}
 
-    /* scroll indicator */
-    .scroll-hint {
-      position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
-      z-index: 2;
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-    }
-    .scroll-hint span {
-      font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--muted);
-    }
-    .scroll-line {
-      width: 1px; height: 60px;
-      background: linear-gradient(to bottom, var(--red), transparent);
-      animation: scrollpulse 2s ease-in-out infinite;
-    }
-    @keyframes scrollpulse {
-      0%,100% { opacity: .4; transform: scaleY(1); }
-      50%      { opacity: 1;  transform: scaleY(1.15); }
-    }
+.field-group{display:flex;flex-direction:column;gap:16px;margin-bottom:24px;}
+.field{display:flex;flex-direction:column;gap:7px;}
+.field label{font-family:'Syncopate',sans-serif;font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);}
+.field input,.field select,.field textarea{
+  background:var(--panel);border:1px solid var(--border);
+  color:var(--text);font-family:'Cormorant Garamond',serif;
+  font-size:16px;font-weight:300;padding:14px 16px;
+  outline:none;-webkit-appearance:none;
+  transition:border-color .25s,box-shadow .25s;
+  border-radius:0;width:100%;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(217,58,26,.1);}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted);}
+.field textarea{resize:vertical;min-height:100px;}
+.field select option{background:var(--panel);}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.step-nav{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;}
+.btn-next{
+  font-family:'Syncopate',sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  padding:15px 32px;background:var(--red);color:#fff;border:none;cursor:pointer;
+  transition:box-shadow .25s,transform .15s,opacity .2s;-webkit-tap-highlight-color:transparent;
+}
+.btn-next:active{transform:scale(.97);}
+.btn-next:hover{box-shadow:0 0 28px var(--glow-r);}
+.btn-back{
+  font-family:'Syncopate',sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  padding:15px 24px;background:transparent;border:1px solid var(--border);
+  color:var(--muted);cursor:pointer;transition:border-color .2s,color .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.btn-back:hover{border-color:var(--muted);color:var(--text);}
+.form-status{
+  min-height:24px;
+  margin-top:14px;
+  font-size:15px;
+  color:var(--muted2);
+}
+.form-status.error{color:#ff9d89;}
+.form-status.success{color:var(--ok);}
 
-    /* ── SECTION SHARED ────────────────────────────── */
-    section { position: relative; z-index: 1; }
-    .section-label {
-      font-family: 'Syncopate', sans-serif;
-      font-size: 9px; letter-spacing: .35em; text-transform: uppercase;
-      color: var(--red); margin-bottom: 16px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .section-label::before {
-      content: ''; display: block;
-      width: 32px; height: 1px; background: var(--red);
-    }
-    h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(52px, 7vw, 96px);
-      line-height: .95; letter-spacing: .02em; text-transform: uppercase;
-    }
+/* CONFIRMATION */
+#confirm{
+  display:none;position:fixed;inset:0;z-index:800;
+  background:rgba(8,5,3,0);
+  align-items:center;justify-content:center;padding:24px;
+}
+#confirm.show{display:flex;animation:confirmFade .8s forwards;}
+@keyframes confirmFade{0%{background:rgba(8,5,3,0);}100%{background:rgba(8,5,3,.97);}}
+.confirm-inner{
+  text-align:center;max-width:480px;width:100%;
+  position:relative;z-index:2;
+  opacity:0;transform:translateY(30px);
+  transition:opacity .9s .4s,transform .9s .4s;
+}
+#confirm.show .confirm-inner{opacity:1;transform:translateY(0);}
+.confirm-orb{position:relative;width:160px;height:160px;margin:0 auto 36px;}
+.c-ring{position:absolute;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid;}
+.c-ring:nth-child(1){width:60px;height:60px;border-color:rgba(217,58,26,.8);background:radial-gradient(circle,rgba(217,58,26,.2),transparent);animation:rspin 3s linear infinite;}
+.c-ring:nth-child(2){width:100px;height:100px;border-color:rgba(217,58,26,.35);animation:rspin 5s linear infinite reverse;}
+.c-ring:nth-child(3){width:140px;height:140px;border-color:rgba(240,165,0,.2);animation:rspin 8s linear infinite;}
+.c-ring:nth-child(4){width:160px;height:160px;border-color:rgba(240,165,0,.1);animation:rspin 12s linear infinite reverse;}
+.c-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px;animation:pulse 3s ease-in-out infinite;}
+.confirm-eyebrow{font-family:'Syncopate',sans-serif;font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:var(--amber);margin-bottom:16px;}
+.confirm-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,14vw,80px);line-height:.9;color:var(--text);margin-bottom:6px;}
+.confirm-title em{color:var(--red);font-style:normal;}
+.confirm-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,5vw,22px);font-style:italic;line-height:1.6;color:var(--muted2);margin:20px auto;max-width:360px;}
+.confirm-line{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--red),transparent);margin:24px auto;}
+.confirm-note{font-family:'Syncopate',sans-serif;font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);}
+.confirm-close{
+  margin-top:36px;font-family:'Syncopate',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  padding:12px 28px;border:1px solid var(--border2);color:var(--muted2);background:transparent;cursor:pointer;
+  transition:border-color .2s,color .2s;-webkit-tap-highlight-color:transparent;
+}
+.confirm-close:hover{border-color:var(--red);color:var(--red);}
+.particle{position:absolute;border-radius:50%;background:var(--red);pointer-events:none;animation:float-p linear infinite;opacity:0;}
+@keyframes float-p{0%{transform:translateY(100vh) scale(0);opacity:0;}10%{opacity:.6;}90%{opacity:.3;}100%{transform:translateY(-10vh) scale(1);opacity:0;}}
 
-    /* ── ABOUT ─────────────────────────────────────── */
-    #about {
-      padding: 140px 60px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-    }
-    .about-img-wrap {
-      position: relative;
-    }
-    .about-img-wrap::before {
-      content: '';
-      position: absolute; inset: -1px;
-      background: linear-gradient(135deg, var(--red) 0%, transparent 50%, var(--amber) 100%);
-      z-index: 0;
-      clip-path: polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%);
-    }
-    .about-img-inner {
-      position: relative; z-index: 1;
-      clip-path: polygon(8% 0%, 100% 0%, 92% 100%, 0% 100%);
-      background: var(--panel);
-      height: 520px;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
-    }
-    .about-img-inner img {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: saturate(1.2) contrast(1.05);
-    }
-    /* Decorative DJ platter icon */
-    .dj-platter {
-      width: 200px; height: 200px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #2a1f15 0%, #0d0906 100%);
-      border: 2px solid rgba(232,57,26,.3);
-      display: flex; align-items: center; justify-content: center;
-      position: relative;
-    }
-    .dj-platter::before {
-      content: '';
-      position: absolute;
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: var(--red);
-      box-shadow: 0 0 30px var(--glow-r);
-    }
-    .dj-platter::after {
-      content: '';
-      position: absolute; inset: 20px;
-      border-radius: 50%;
-      border: 1px solid rgba(232,57,26,.25);
-      animation: spin 8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .ring2 {
-      position: absolute; inset: 10px;
-      border-radius: 50%;
-      border: 1px solid rgba(245,166,35,.15);
-      animation: spin 12s linear infinite reverse;
-    }
+/* FOOTER */
+footer{background:var(--deep);padding:60px 24px calc(40px + env(safe-area-inset-bottom,0));border-top:1px solid var(--border);}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1;letter-spacing:.04em;margin-bottom:8px;}
+.footer-logo em{color:var(--red);font-style:normal;}
+.footer-sub{font-size:12px;letter-spacing:.08em;color:var(--muted);margin-bottom:36px;}
+.footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:40px;}
+.footer-col h4{font-family:'Syncopate',sans-serif;font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);margin-bottom:14px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.footer-col a{font-size:14px;color:var(--muted);text-decoration:none;transition:color .2s;}
+.footer-col a:hover{color:var(--text);}
+.footer-bottom{padding-top:24px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:16px;}
+.footer-bottom p{font-size:11px;color:var(--muted);}
+.social-row{display:flex;gap:12px;}
+.soc{width:36px;height:36px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:11px;font-family:'Syncopate',sans-serif;transition:border-color .2s,color .2s;}
+.soc:hover{border-color:var(--red);color:var(--red);}
 
-    .about-text h2 { margin-bottom: 28px; }
-    .about-text p {
-      font-size: 15px; line-height: 1.75; color: var(--muted); margin-bottom: 20px;
-    }
-    .about-text p strong { color: var(--text); font-weight: 500; }
-    .about-accent {
-      display: inline-block;
-      margin-top: 12px;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px; letter-spacing: .1em;
-      color: var(--amber);
-    }
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1);}
+.reveal.on{opacity:1;transform:translateY(0);}
 
-    /* ── SERVICES ──────────────────────────────────── */
-    #services {
-      padding: 120px 60px;
-      background: linear-gradient(to bottom, transparent, rgba(232,57,26,.03), transparent);
-    }
-    .services-header { margin-bottom: 72px; }
-    .services-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
-    }
-    .service-card {
-      background: var(--panel);
-      padding: 48px 36px;
-      border-top: 2px solid transparent;
-      transition: border-color .3s, background .3s, transform .3s;
-      position: relative; overflow: hidden;
-    }
-    .service-card::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(232,57,26,.06), transparent);
-      opacity: 0; transition: opacity .3s;
-    }
-    .service-card:hover { border-color: var(--red); background: #1e170f; transform: translateY(-4px); }
-    .service-card:hover::before { opacity: 1; }
-    .service-icon {
-      font-size: 32px; margin-bottom: 24px;
-      filter: drop-shadow(0 0 8px var(--glow-a));
-    }
-    .service-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 72px; color: rgba(232,57,26,.08);
-      position: absolute; top: 12px; right: 20px;
-      line-height: 1;
-    }
-    .service-card h3 {
-      font-family: 'Syncopate', sans-serif;
-      font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
-      margin-bottom: 14px; color: var(--text);
-    }
-    .service-card p {
-      font-size: 13.5px; line-height: 1.7; color: var(--muted);
-    }
-
-    /* ── LOCATIONS ─────────────────────────────────── */
-    #locations { padding: 120px 60px; }
-    .locations-header { margin-bottom: 72px; }
-    .locations-grid {
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px;
-    }
-    .loc-card {
-      background: var(--panel);
-      padding: 40px 28px;
-      display: flex; flex-direction: column;
-      border-bottom: 2px solid transparent;
-      transition: border-color .3s, background .3s;
-      position: relative; overflow: hidden;
-    }
-    .loc-card:hover { border-color: var(--amber); background: #1e1a10; }
-    .loc-card::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 0;
-      background: linear-gradient(to top, rgba(245,166,35,.08), transparent);
-      transition: height .4s;
-    }
-    .loc-card:hover::after { height: 100%; }
-    .loc-city {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 42px; line-height: 1;
-      color: var(--text); margin-bottom: 8px;
-    }
-    .loc-state {
-      font-size: 10px; letter-spacing: .3em; text-transform: uppercase;
-      color: var(--red); margin-bottom: 20px;
-    }
-    .loc-desc {
-      font-size: 12.5px; line-height: 1.6; color: var(--muted);
-      flex: 1;
-    }
-    .loc-dot {
-      margin-top: 24px;
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--amber);
-      box-shadow: 0 0 12px var(--glow-a);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%,100% { box-shadow: 0 0 8px var(--glow-a); transform: scale(1); }
-      50%      { box-shadow: 0 0 20px var(--glow-a); transform: scale(1.3); }
-    }
-    .loc-card:nth-child(2) .loc-dot { animation-delay: .3s; }
-    .loc-card:nth-child(3) .loc-dot { animation-delay: .6s; }
-    .loc-card:nth-child(4) .loc-dot { animation-delay: .9s; }
-    .loc-card:nth-child(5) .loc-dot { animation-delay: 1.2s; }
-
-    /* ── BOOKING FORM ──────────────────────────────── */
-    #booking {
-      padding: 140px 60px;
-      background: var(--surface);
-      position: relative; overflow: hidden;
-    }
-    #booking::before {
-      content: '';
-      position: absolute;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(232,57,26,.1) 0%, transparent 70%);
-      top: -200px; right: -100px;
-      pointer-events: none;
-    }
-    #booking::after {
-      content: '';
-      position: absolute;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,166,35,.07) 0%, transparent 70%);
-      bottom: -100px; left: 200px;
-      pointer-events: none;
-    }
-    .booking-inner {
-      display: grid; grid-template-columns: 1fr 1.2fr; gap: 100px;
-      align-items: start; position: relative; z-index: 1;
-    }
-    .booking-info h2 { margin-bottom: 28px; }
-    .booking-info p {
-      font-size: 15px; line-height: 1.75; color: var(--muted); margin-bottom: 40px;
-    }
-    .contact-details { display: flex; flex-direction: column; gap: 16px; }
-    .contact-item {
-      display: flex; align-items: center; gap: 16px;
-      font-size: 13px; color: var(--muted);
-    }
-    .contact-item .icon {
-      width: 36px; height: 36px; border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; color: var(--amber); flex-shrink: 0;
-    }
-
-    /* FORM */
-    .booking-form { display: flex; flex-direction: column; gap: 16px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .field {
-      display: flex; flex-direction: column; gap: 8px;
-    }
-    .field label {
-      font-size: 9px; letter-spacing: .3em; text-transform: uppercase;
-      color: var(--muted);
-    }
-    .field input, .field select, .field textarea {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px; font-weight: 300;
-      padding: 14px 18px;
-      outline: none; cursor: none;
-      transition: border-color .25s, box-shadow .25s;
-      appearance: none;
-    }
-    .field input:focus, .field select:focus, .field textarea:focus {
-      border-color: var(--red);
-      box-shadow: 0 0 0 3px rgba(232,57,26,.12);
-    }
-    .field input::placeholder, .field textarea::placeholder { color: var(--muted); }
-    .field textarea { resize: vertical; min-height: 120px; }
-    .field select option { background: var(--panel); }
-    .form-submit {
-      margin-top: 8px;
-      font-family: 'Syncopate', sans-serif;
-      font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
-      padding: 18px 40px;
-      background: var(--red); color: #fff; border: none; cursor: none;
-      transition: box-shadow .3s, transform .2s;
-      align-self: flex-start;
-    }
-    .form-submit:hover {
-      box-shadow: 0 0 40px var(--glow-r), 0 0 80px rgba(232,57,26,.15);
-      transform: translateY(-2px);
-    }
-
-    /* ── MARQUEE ───────────────────────────────────── */
-    .marquee-wrap {
-      padding: 28px 0;
-      background: var(--red);
-      overflow: hidden; white-space: nowrap;
-    }
-    .marquee-track {
-      display: inline-flex; gap: 0;
-      animation: marquee 18s linear infinite;
-    }
-    .marquee-track span {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px; letter-spacing: .12em;
-      padding: 0 40px; color: rgba(255,255,255,.9);
-    }
-    .marquee-track .sep { color: rgba(255,255,255,.4); }
-    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-    /* ── FOOTER ────────────────────────────────────── */
-    footer {
-      background: var(--deep);
-      padding: 80px 60px 40px;
-      border-top: 1px solid var(--border);
-    }
-    .footer-top {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: 60px;
-    }
-    .footer-brand h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 52px; line-height: 1; letter-spacing: .04em;
-    }
-    .footer-brand h3 span { color: var(--red); }
-    .footer-brand p {
-      font-size: 12px; color: var(--muted); margin-top: 8px; letter-spacing: .05em;
-    }
-    .footer-nav-group h4 {
-      font-family: 'Syncopate', sans-serif;
-      font-size: 9px; letter-spacing: .3em; text-transform: uppercase;
-      color: var(--amber); margin-bottom: 20px;
-    }
-    .footer-nav-group ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .footer-nav-group a {
-      font-size: 13px; color: var(--muted); text-decoration: none;
-      transition: color .2s;
-    }
-    .footer-nav-group a:hover { color: var(--text); }
-    .footer-bottom {
-      border-top: 1px solid var(--border);
-      padding-top: 32px;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .footer-bottom p { font-size: 11px; color: var(--muted); }
-    .social-row { display: flex; gap: 16px; }
-    .social-btn {
-      width: 36px; height: 36px; border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--muted); text-decoration: none; font-size: 13px;
-      transition: border-color .2s, color .2s, box-shadow .2s;
-    }
-    .social-btn:hover {
-      border-color: var(--red); color: var(--red);
-      box-shadow: 0 0 16px rgba(232,57,26,.2);
-    }
-
-    /* ── ANIMATIONS ────────────────────────────────── */
-    .reveal {
-      opacity: 0; transform: translateY(36px);
-      transition: opacity .8s cubic-bezier(.23,1,.32,1), transform .8s cubic-bezier(.23,1,.32,1);
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-left {
-      opacity: 0; transform: translateX(-40px);
-      transition: opacity .9s cubic-bezier(.23,1,.32,1), transform .9s cubic-bezier(.23,1,.32,1);
-    }
-    .reveal-left.visible { opacity: 1; transform: translateX(0); }
-    .reveal-right {
-      opacity: 0; transform: translateX(40px);
-      transition: opacity .9s cubic-bezier(.23,1,.32,1), transform .9s cubic-bezier(.23,1,.32,1);
-    }
-    .reveal-right.visible { opacity: 1; transform: translateX(0); }
-
-    /* Stagger children */
-    .stagger > * { transition-delay: 0s; }
-    .stagger > *:nth-child(1) { transition-delay: 0s; }
-    .stagger > *:nth-child(2) { transition-delay: .1s; }
-    .stagger > *:nth-child(3) { transition-delay: .2s; }
-    .stagger > *:nth-child(4) { transition-delay: .3s; }
-    .stagger > *:nth-child(5) { transition-delay: .4s; }
-
-    /* ── RESPONSIVE ────────────────────────────────── */
-    @media (max-width: 1024px) {
-      nav { padding: 24px 32px; }
-      #hero, #about, #services, #locations, #booking, footer { padding-left: 32px; padding-right: 32px; }
-      #about { grid-template-columns: 1fr; gap: 48px; }
-      .about-img-wrap { max-width: 480px; }
-      .services-grid { grid-template-columns: 1fr 1fr; }
-      .locations-grid { grid-template-columns: repeat(3, 1fr); }
-      .booking-inner { grid-template-columns: 1fr; gap: 60px; }
-      .hero-stats { display: none; }
-    }
-    @media (max-width: 640px) {
-      nav { padding: 20px 20px; }
-      .nav-links { display: none; }
-      #hero { padding: 0 20px 60px; }
-      #about, #services, #locations, #booking, footer { padding-left: 20px; padding-right: 20px; }
-      .services-grid, .locations-grid { grid-template-columns: 1fr; }
-      .footer-top { flex-direction: column; gap: 40px; }
-      .form-row { grid-template-columns: 1fr; }
-    }
-  </style>
+/* DESKTOP */
+@media(min-width:768px){
+  .nav-inner{padding:24px 60px;}
+  .sec-pad{padding:120px 60px;}
+  #hero{padding:0 60px clamp(80px,14vh,120px);}
+  .about-grid{grid-template-columns:1fr 1fr;align-items:center;gap:80px;}
+  .about-visual{aspect-ratio:unset;height:480px;}
+  .svc-grid{grid-template-columns:repeat(3,1fr);}
+  .event-grid{grid-template-columns:repeat(4,1fr);}
+  .footer-grid{grid-template-columns:repeat(4,1fr);}
+  .footer-bottom{flex-direction:row;justify-content:space-between;align-items:center;}
+  #booking{padding:120px 60px;}
+  .hero-rings{right:-40px;}
+}
+</style>
 </head>
 <body>
 
-  <div id="cursor"></div>
-  <div id="cursor-ring"></div>
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">B<em>.</em>MUHOYA</a>
+    <a href="#booking" class="nav-book">Book Now</a>
+  </div>
+</nav>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#" class="nav-logo">B<span>.</span>MUHOYA</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#locations">Locations</a></li>
-      <li><a href="#booking">Contact</a></li>
-    </ul>
-    <a href="#booking" class="nav-cta">Book Now</a>
-  </nav>
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-rings">
+      <div class="hr"><div class="hr-dot"></div></div>
+      <div class="hr"></div>
+      <div class="hr"></div>
+      <div class="hr"></div>
+    </div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">Princeton, NJ · Nationwide</div>
+    <h1><span class="r">Benjamin</span><br>Muhoya</h1>
+    <p class="hero-sub">DJ. Event Host. The energy your event has been missing.</p>
+    <div class="hero-cta">
+      <a href="#booking" class="btn-fire">Book Your Event</a>
+      <a href="#about" class="btn-outline">Learn More</a>
+    </div>
+  </div>
+</section>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-bg">
-      <div class="scanline"></div>
-    </div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">Princeton, NJ &amp; Nationwide</div>
-      <h1>
-        <span class="line-red">Benjamin</span>
-        <span class="line-white">Muhoya</span>
-      </h1>
-      <p class="hero-sub">
-        Premier DJ, event host, and booking service — bringing world-class sound and electric energy to your event, coast to coast.
-      </p>
-      <div class="hero-actions">
-        <a href="#booking" class="btn-primary">Book an Event</a>
-        <a href="#services" class="btn-ghost">Explore Services</a>
-      </div>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num">500<span>+</span></div>
-        <div class="stat-label">Events Hosted</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">6<span>+</span></div>
-        <div class="stat-label">Cities</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">10<span>yr</span></div>
-        <div class="stat-label">In the Game</div>
-      </div>
-    </div>
-    <div class="scroll-hint">
-      <div class="scroll-line"></div>
-      <span>Scroll</span>
-    </div>
-  </section>
+<div class="marquee">
+  <div class="marquee-track">
+    <span>DJ SETS</span><span class="dot">✦</span>
+    <span>WEDDINGS</span><span class="dot">✦</span>
+    <span>CORPORATE</span><span class="dot">✦</span>
+    <span>BIRTHDAYS</span><span class="dot">✦</span>
+    <span>GRADUATIONS</span><span class="dot">✦</span>
+    <span>BABY SHOWERS</span><span class="dot">✦</span>
+    <span>CLUB NIGHTS</span><span class="dot">✦</span>
+    <span>PRIVATE PARTIES</span><span class="dot">✦</span>
+    <span>DJ SETS</span><span class="dot">✦</span>
+    <span>WEDDINGS</span><span class="dot">✦</span>
+    <span>CORPORATE</span><span class="dot">✦</span>
+    <span>BIRTHDAYS</span><span class="dot">✦</span>
+    <span>GRADUATIONS</span><span class="dot">✦</span>
+    <span>BABY SHOWERS</span><span class="dot">✦</span>
+    <span>CLUB NIGHTS</span><span class="dot">✦</span>
+    <span>PRIVATE PARTIES</span><span class="dot">✦</span>
+  </div>
+</div>
 
-  <!-- MARQUEE -->
-  <div class="marquee-wrap">
-    <div class="marquee-track">
-      <span>DJ SETS</span><span class="sep">✦</span>
-      <span>CORPORATE EVENTS</span><span class="sep">✦</span>
-      <span>WEDDINGS</span><span class="sep">✦</span>
-      <span>CLUB NIGHTS</span><span class="sep">✦</span>
-      <span>PRIVATE PARTIES</span><span class="sep">✦</span>
-      <span>FESTIVAL STAGES</span><span class="sep">✦</span>
-      <span>DJ BOOKINGS</span><span class="sep">✦</span>
-      <span>EVENT HOSTING</span><span class="sep">✦</span>
-      <!-- duplicate for seamless loop -->
-      <span>DJ SETS</span><span class="sep">✦</span>
-      <span>CORPORATE EVENTS</span><span class="sep">✦</span>
-      <span>WEDDINGS</span><span class="sep">✦</span>
-      <span>CLUB NIGHTS</span><span class="sep">✦</span>
-      <span>PRIVATE PARTIES</span><span class="sep">✦</span>
-      <span>FESTIVAL STAGES</span><span class="sep">✦</span>
-      <span>DJ BOOKINGS</span><span class="sep">✦</span>
-      <span>EVENT HOSTING</span><span class="sep">✦</span>
+<section id="about" class="sec-pad">
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="platter-wrap">
+        <div class="platter">
+          <div class="groove" style="width:60%;height:60%"></div>
+          <div class="groove" style="width:75%;height:75%"></div>
+          <div class="groove" style="width:88%;height:88%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <div class="sec-label">Who We Are</div>
+      <h2>The Man<br>Behind the<br><span class="r">Decks</span></h2>
+      <p>Based out of <strong>Princeton, NJ</strong>, Benjamin Muhoya has spent over a decade commanding dancefloors and curating moments people never forget.</p>
+      <p>With a roster of elite DJs across <strong>New York, LA, San Diego, Berkeley, and Oakland</strong> — we match every event with exactly the right energy.</p>
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="stat-n">500<em>+</em></div>
+          <div class="stat-l">Events</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-n">6<em>+</em></div>
+          <div class="stat-l">Cities</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-n">10<em>yr</em></div>
+          <div class="stat-l">Experience</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="sec-pad">
+  <div class="sec-label">What We Do</div>
+  <h2>Our <span class="r">Services</span></h2>
+  <div class="svc-grid">
+    <div class="svc-card reveal"><div class="svc-num">01</div><div class="svc-icon">🎛️</div><h3>Live DJ Sets</h3><p>Tailored sets for your crowd — hip-hop, Afrobeats, house, R&B, top 40 and everything between.</p></div>
+    <div class="svc-card reveal"><div class="svc-num">02</div><div class="svc-icon">🎤</div><h3>Event Hosting</h3><p>Charismatic MC services to anchor your event and keep energy at its peak all night.</p></div>
+    <div class="svc-card reveal"><div class="svc-num">03</div><div class="svc-icon">💼</div><h3>Corporate Events</h3><p>Product launches, galas, brand activations — professional sound that impresses every guest.</p></div>
+    <div class="svc-card reveal"><div class="svc-num">04</div><div class="svc-icon">💍</div><h3>Weddings</h3><p>From first dance to last song — every musical moment handled with heart and precision.</p></div>
+    <div class="svc-card reveal"><div class="svc-num">05</div><div class="svc-icon">🎂</div><h3>Celebrations</h3><p>Birthdays, graduations, baby showers — we make every milestone hit different.</p></div>
+    <div class="svc-card reveal"><div class="svc-num">06</div><div class="svc-icon">🔊</div><h3>DJ Bookings</h3><p>Tap into our nationwide roster. We find the perfect DJ for your budget and city.</p></div>
+  </div>
+</section>
+
+<section id="locations" class="sec-pad">
+  <div class="sec-label">Where We Are</div>
+  <h2>Our <span class="r">Locations</span></h2>
+  <div class="loc-list">
+    <div class="loc-item active-city reveal">
+      <div class="loc-copy">
+        <div class="loc-city">New York</div>
+        <div class="loc-meta">
+          <div class="loc-state">New York · Flagship City</div>
+          <div class="loc-badge">Active</div>
+        </div>
+      </div>
+      <div class="loc-dot" aria-hidden="true"></div>
+    </div>
+    <div class="loc-item pending-city reveal">
+      <div class="loc-copy">
+        <div class="loc-city">Los Angeles</div>
+        <div class="loc-meta">
+          <div class="loc-state">California</div>
+          <div class="loc-badge">Pending</div>
+        </div>
+      </div>
+      <div class="loc-dot" aria-hidden="true"></div>
+    </div>
+    <div class="loc-item pending-city reveal">
+      <div class="loc-copy">
+        <div class="loc-city">San Diego</div>
+        <div class="loc-meta">
+          <div class="loc-state">California</div>
+          <div class="loc-badge">Pending</div>
+        </div>
+      </div>
+      <div class="loc-dot" aria-hidden="true"></div>
+    </div>
+    <div class="loc-item pending-city reveal">
+      <div class="loc-copy">
+        <div class="loc-city">Berkeley</div>
+        <div class="loc-meta">
+          <div class="loc-state">California · Bay Area</div>
+          <div class="loc-badge">Pending</div>
+        </div>
+      </div>
+      <div class="loc-dot" aria-hidden="true"></div>
+    </div>
+    <div class="loc-item pending-city reveal">
+      <div class="loc-copy">
+        <div class="loc-city">Oakland</div>
+        <div class="loc-meta">
+          <div class="loc-state">California · East Bay</div>
+          <div class="loc-badge">Pending</div>
+        </div>
+      </div>
+      <div class="loc-dot" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<section id="booking">
+  <div class="booking-header reveal">
+    <div class="sec-label">Let's Make It Happen</div>
+    <h2>Book Your <span class="r">Event</span></h2>
+    <p>Tell us about your vibe and we'll take it from there.</p>
+    <div class="booking-note">
+      <strong>Supabase-ready intake:</strong> once you add your project URL and anon key below in the script, submissions will go straight into your database. Until then, the form still keeps a local backup in this browser.
     </div>
   </div>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about-img-wrap reveal-left">
-      <div class="about-img-inner">
-        <div class="dj-platter">
-          <div class="ring2"></div>
-        </div>
-      </div>
-    </div>
-    <div class="about-text reveal-right">
-      <div class="section-label">About Benjamin</div>
-      <h2>The Man<br />Behind the<br /><span style="color:var(--red)">Decks</span></h2>
-      <p>
-        Based out of <strong>Princeton, NJ</strong>, Benjamin Muhoya has been commanding dancefloors and curating unforgettable sonic experiences for over a decade. From intimate private gatherings to massive corporate galas, Benjamin brings unmatched energy, technical mastery, and musical intuition to every event.
-      </p>
-      <p>
-        With a network of elite DJs operating across <strong>New York, Los Angeles, San Diego, Berkeley, and Oakland</strong>, Benjamin's booking service connects clients with the right artist for any occasion — every time.
-      </p>
-      <span class="about-accent">Raising the Standard. Every Set.</span>
-    </div>
-  </section>
+  <div class="steps-bar">
+    <div class="step-pip active" id="pip1"></div>
+    <div class="step-pip" id="pip2"></div>
+    <div class="step-pip" id="pip3"></div>
+  </div>
 
-  <!-- SERVICES -->
-  <section id="services">
-    <div class="services-header reveal">
-      <div class="section-label">What We Offer</div>
-      <h2>Our <span style="color:var(--red)">Services</span></h2>
+  <div class="step-panel active" id="step1">
+    <div class="step-title">What's the <em>occasion?</em></div>
+    <div class="event-grid">
+      <div class="event-card" data-val="Birthday"><div class="event-emoji">🎂</div><div class="event-label">Birthday</div></div>
+      <div class="event-card" data-val="Wedding"><div class="event-emoji">💍</div><div class="event-label">Wedding</div></div>
+      <div class="event-card" data-val="Graduation"><div class="event-emoji">🎓</div><div class="event-label">Graduation</div></div>
+      <div class="event-card" data-val="Baby Shower"><div class="event-emoji">🍼</div><div class="event-label">Baby Shower</div></div>
+      <div class="event-card" data-val="Corporate"><div class="event-emoji">💼</div><div class="event-label">Corporate</div></div>
+      <div class="event-card" data-val="Club Night"><div class="event-emoji">🔊</div><div class="event-label">Club Night</div></div>
+      <div class="event-card" data-val="House Party"><div class="event-emoji">🏠</div><div class="event-label">House Party</div></div>
+      <div class="event-card" data-val="Other"><div class="event-emoji">✨</div><div class="event-label">Other</div></div>
     </div>
-    <div class="services-grid stagger">
-      <div class="service-card reveal">
-        <div class="service-num">01</div>
-        <div class="service-icon">🎛️</div>
-        <h3>Live DJ Sets</h3>
-        <p>Benjamin and our roster of DJs deliver live performances tailored to your event's vibe — from deep house to hip-hop, Afrobeats to top 40.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-num">02</div>
-        <div class="service-icon">🎤</div>
-        <h3>Event Hosting</h3>
-        <p>Charismatic, professional MC services to anchor your event — keeping the energy high and the crowd fully engaged from start to finish.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-num">03</div>
-        <div class="service-icon">💼</div>
-        <h3>Corporate Events</h3>
-        <p>Elevate company parties, product launches, and brand activations with curated music experiences that impress clients and energize teams.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-num">04</div>
-        <div class="service-icon">💍</div>
-        <h3>Weddings</h3>
-        <p>From ceremony to last dance — we coordinate every musical moment of your most important day with care, precision, and heart.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-num">05</div>
-        <div class="service-icon">🔊</div>
-        <h3>DJ Bookings</h3>
-        <p>Tap into our nationwide roster of vetted, professional DJs. We match you with the perfect artist for your budget, genre, and city.</p>
-      </div>
-      <div class="service-card reveal">
-        <div class="service-num">06</div>
-        <div class="service-icon">🎉</div>
-        <h3>Private Parties</h3>
-        <p>Birthday bashes, rooftop parties, villa nights — we bring professional-grade sound and performance energy to any private occasion.</p>
-      </div>
+    <div class="step-nav">
+      <button class="btn-next" type="button" onclick="goStep(2)">Next →</button>
     </div>
-  </section>
+  </div>
 
-  <!-- LOCATIONS -->
-  <section id="locations">
-    <div class="locations-header reveal">
-      <div class="section-label">Where We Are</div>
-      <h2>Our <span style="color:var(--red)">Locations</span></h2>
-    </div>
-    <div class="locations-grid stagger">
-      <div class="loc-card reveal">
-        <div class="loc-city">New York</div>
-        <div class="loc-state">New York</div>
-        <p class="loc-desc">Our flagship city. Clubs, rooftops, and event venues across all five boroughs.</p>
-        <div class="loc-dot"></div>
+  <div class="step-panel" id="step2">
+    <div class="step-title">Tell us the <em>details</em></div>
+    <div class="field-group">
+      <div class="row2">
+        <div class="field"><label for="fname">First Name</label><input type="text" id="fname" placeholder="Your name" autocomplete="given-name"/></div>
+        <div class="field"><label for="lname">Last Name</label><input type="text" id="lname" placeholder="Last name" autocomplete="family-name"/></div>
       </div>
-      <div class="loc-card reveal">
-        <div class="loc-city">Los Angeles</div>
-        <div class="loc-state">California</div>
-        <p class="loc-desc">From West Hollywood to Venice — premium events under the California sun and stars.</p>
-        <div class="loc-dot"></div>
+      <div class="field"><label for="email">Email</label><input type="email" id="email" placeholder="your@email.com" autocomplete="email"/></div>
+      <div class="field"><label for="phone">Phone</label><input type="tel" id="phone" placeholder="+1 (000) 000-0000" autocomplete="tel"/></div>
+      <div class="row2">
+        <div class="field"><label for="edate">Event Date</label><input type="date" id="edate"/></div>
+        <div class="field"><label for="guests">Guest Count</label><input type="number" id="guests" placeholder="e.g. 80"/></div>
       </div>
-      <div class="loc-card reveal">
-        <div class="loc-city">San Diego</div>
-        <div class="loc-state">California</div>
-        <p class="loc-desc">Beachfront parties, corporate galas, and nightlife events in America's Finest City.</p>
-        <div class="loc-dot"></div>
-      </div>
-      <div class="loc-card reveal">
-        <div class="loc-city">Berkeley</div>
-        <div class="loc-state">California</div>
-        <p class="loc-desc">Serving the Bay Area with creative, culturally-rich events in and around Berkeley.</p>
-        <div class="loc-dot"></div>
-      </div>
-      <div class="loc-card reveal">
-        <div class="loc-city">Oakland</div>
-        <div class="loc-state">California</div>
-        <p class="loc-desc">Deep in the East Bay — warehouse raves, community events, and club nights.</p>
-        <div class="loc-dot"></div>
+      <div class="field">
+        <label for="city">City</label>
+        <select id="city">
+          <option value="" disabled selected>Select a city</option>
+          <option>New York, NY</option>
+          <option>Los Angeles, CA</option>
+          <option>San Diego, CA</option>
+          <option>Berkeley, CA</option>
+          <option>Oakland, CA</option>
+          <option>Princeton, NJ</option>
+          <option>Other</option>
+        </select>
       </div>
     </div>
-  </section>
+    <div class="step-nav">
+      <button class="btn-back" type="button" onclick="goStep(1)">← Back</button>
+      <button class="btn-next" type="button" onclick="goStep(3)">Next →</button>
+    </div>
+  </div>
 
-  <!-- BOOKING FORM -->
-  <section id="booking">
-    <div class="booking-inner">
-      <div class="booking-info reveal-left">
-        <div class="section-label">Get In Touch</div>
-        <h2>Book Your<br /><span style="color:var(--red)">Event</span></h2>
-        <p>
-          Ready to take your event to the next level? Fill out the form and we'll get back to you within 24 hours with availability and pricing.
-        </p>
-        <div class="contact-details">
-          <div class="contact-item">
-            <div class="icon">📍</div>
-            <span>Princeton, NJ — Serving Nationwide</span>
-          </div>
-          <div class="contact-item">
-            <div class="icon">📧</div>
-            <span>bookings@benjaminmuhoya.com</span>
-          </div>
-          <div class="contact-item">
-            <div class="icon">📞</div>
-            <span>+1 (609) 555 — 0182</span>
-          </div>
-          <div class="contact-item">
-            <div class="icon">🕐</div>
-            <span>Response within 24 hours guaranteed</span>
-          </div>
-        </div>
+  <div class="step-panel" id="step3">
+    <div class="step-title">Almost <em>there...</em></div>
+    <div class="field-group">
+      <div class="field">
+        <label for="vibe">Music Vibe</label>
+        <select id="vibe">
+          <option value="" disabled selected>What's the energy?</option>
+          <option>Hip-Hop / Rap</option>
+          <option>Afrobeats / Dancehall</option>
+          <option>R&B / Soul</option>
+          <option>House / Electronic</option>
+          <option>Top 40 / Pop</option>
+          <option>Latin / Reggaeton</option>
+          <option>Mixed / Surprise Me</option>
+        </select>
       </div>
-      <div class="reveal-right">
-        <div class="booking-form">
-          <div class="form-row">
-            <div class="field">
-              <label>First Name</label>
-              <input type="text" placeholder="John" />
-            </div>
-            <div class="field">
-              <label>Last Name</label>
-              <input type="text" placeholder="Smith" />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="field">
-              <label>Email</label>
-              <input type="email" placeholder="john@email.com" />
-            </div>
-            <div class="field">
-              <label>Phone</label>
-              <input type="tel" placeholder="+1 (000) 000-0000" />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="field">
-              <label>Event Type</label>
-              <select>
-                <option value="" disabled selected>Select Type</option>
-                <option>Wedding</option>
-                <option>Corporate Event</option>
-                <option>Private Party</option>
-                <option>Club / Venue Night</option>
-                <option>Festival</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Location</label>
-              <select>
-                <option value="" disabled selected>Select City</option>
-                <option>New York, NY</option>
-                <option>Los Angeles, CA</option>
-                <option>San Diego, CA</option>
-                <option>Berkeley, CA</option>
-                <option>Oakland, CA</option>
-                <option>Princeton, NJ</option>
-                <option>Other</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="field">
-              <label>Event Date</label>
-              <input type="date" />
-            </div>
-            <div class="field">
-              <label>Guest Count</label>
-              <input type="number" placeholder="e.g. 150" />
-            </div>
-          </div>
-          <div class="field">
-            <label>Tell Us About Your Event</label>
-            <textarea placeholder="Venue, music style, special requests, budget range..."></textarea>
-          </div>
-          <button class="form-submit" type="button">Send Booking Request →</button>
-        </div>
+      <div class="field">
+        <label for="budget">Budget Range</label>
+        <select id="budget">
+          <option value="" disabled selected>Approximate budget</option>
+          <option>Under $500</option>
+          <option>$500 - $1,000</option>
+          <option>$1,000 - $2,500</option>
+          <option>$2,500 - $5,000</option>
+          <option>$5,000+</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="notes">Anything else we should know?</label>
+        <textarea id="notes" placeholder="Venue, special requests, themes..."></textarea>
       </div>
     </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-top">
-      <div class="footer-brand">
-        <h3>B<span>.</span>MUHOYA</h3>
-        <p>DJ · Event Host · Booking Service</p>
-        <p style="margin-top:4px">Princeton, NJ</p>
-      </div>
-      <div class="footer-nav-group">
-        <h4>Navigate</h4>
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#locations">Locations</a></li>
-          <li><a href="#booking">Booking</a></li>
-        </ul>
-      </div>
-      <div class="footer-nav-group">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="#">Live DJ Sets</a></li>
-          <li><a href="#">Weddings</a></li>
-          <li><a href="#">Corporate Events</a></li>
-          <li><a href="#">Private Parties</a></li>
-        </ul>
-      </div>
-      <div class="footer-nav-group">
-        <h4>Locations</h4>
-        <ul>
-          <li><a href="#">New York, NY</a></li>
-          <li><a href="#">Los Angeles, CA</a></li>
-          <li><a href="#">San Diego, CA</a></li>
-          <li><a href="#">Berkeley, CA</a></li>
-          <li><a href="#">Oakland, CA</a></li>
-        </ul>
-      </div>
+    <div class="step-nav">
+      <button class="btn-back" type="button" onclick="goStep(2)">← Back</button>
+      <button class="btn-next" type="button" id="submitBtn" onclick="submitBooking()">Send It</button>
     </div>
-    <div class="footer-bottom">
-      <p>© 2025 Benjamin Muhoya. All Rights Reserved.</p>
-      <div class="social-row">
-        <a class="social-btn" href="#" title="Instagram">𝕀</a>
-        <a class="social-btn" href="#" title="Twitter">𝕏</a>
-        <a class="social-btn" href="#" title="SoundCloud">SC</a>
-        <a class="social-btn" href="#" title="TikTok">TT</a>
-      </div>
+    <div class="form-status" id="formStatus" aria-live="polite"></div>
+  </div>
+</section>
+
+<div id="confirm">
+  <div class="confirm-inner">
+    <div class="confirm-orb">
+      <div class="c-ring"></div>
+      <div class="c-ring"></div>
+      <div class="c-ring"></div>
+      <div class="c-ring"></div>
+      <div class="c-center">🎛️</div>
     </div>
-  </footer>
+    <div class="confirm-eyebrow">Transmission Received</div>
+    <div class="confirm-title">We'll be<br>in <em>touch.</em></div>
+    <div class="confirm-line"></div>
+    <p class="confirm-sub">Something is already in motion. Benjamin will reach out to you personally within 24 hours.</p>
+    <div class="confirm-note">Watch your inbox. Good things are coming.</div>
+    <button class="confirm-close" type="button" onclick="closeConfirm()">Return to the site</button>
+  </div>
+</div>
 
-  <script>
-    // ── Custom cursor
-    const cursor = document.getElementById('cursor');
-    const ring   = document.getElementById('cursor-ring');
-    let mx = 0, my = 0, rx = 0, ry = 0;
+<footer>
+  <div class="footer-logo">B<em>.</em>MUHOYA</div>
+  <div class="footer-sub">DJ · Event Host · Booking Service · Princeton, NJ</div>
+  <div class="footer-grid">
+    <div class="footer-col"><h4>Navigate</h4><ul><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#locations">Locations</a></li><li><a href="#booking">Booking</a></li></ul></div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="#">Live DJ Sets</a></li><li><a href="#">Weddings</a></li><li><a href="#">Corporate</a></li><li><a href="#">Celebrations</a></li></ul></div>
+    <div class="footer-col"><h4>Cities</h4><ul><li><a href="#">New York</a></li><li><a href="#">Los Angeles</a></li><li><a href="#">San Diego</a></li><li><a href="#">Oakland</a></li></ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:bookings@benjaminmuhoya.com">Email Us</a></li><li><a href="tel:+16095550182">+1 (609) 555-0182</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Benjamin Muhoya. All Rights Reserved.</p>
+    <div class="social-row">
+      <a class="soc" href="#">IG</a>
+      <a class="soc" href="#">X</a>
+      <a class="soc" href="#">SC</a>
+      <a class="soc" href="#">TT</a>
+    </div>
+  </div>
+</footer>
 
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      cursor.style.left = mx + 'px';
-      cursor.style.top  = my + 'px';
-    });
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-    function animRing() {
-      rx += (mx - rx) * .12;
-      ry += (my - ry) * .12;
-      ring.style.left = rx + 'px';
-      ring.style.top  = ry + 'px';
-      requestAnimationFrame(animRing);
+const STORAGE_KEY = 'bm_bookings';
+const SUPABASE_CONFIG = {
+  url: 'YOUR_SUPABASE_URL',
+  anonKey: 'YOUR_SUPABASE_ANON_KEY',
+  table: 'booking_requests'
+};
+
+const formStatus = document.getElementById('formStatus');
+const submitBtn = document.getElementById('submitBtn');
+let selectedEvent = '';
+let supabase = null;
+
+function getBookings(){
+  try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');}
+  catch(e){return[];}
+}
+
+function saveBookingLocal(booking){
+  const all = getBookings();
+  all.unshift(booking);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+}
+
+function isSupabaseConfigured(){
+  return SUPABASE_CONFIG.url !== 'YOUR_SUPABASE_URL' && SUPABASE_CONFIG.anonKey !== 'YOUR_SUPABASE_ANON_KEY';
+}
+
+function getSupabaseClient(){
+  if(!isSupabaseConfigured()) return null;
+  if(!supabase){
+    supabase = createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
+  }
+  return supabase;
+}
+
+function setStatus(message, type=''){
+  formStatus.textContent = message;
+  formStatus.className = 'form-status' + (type ? ' ' + type : '');
+}
+
+function resetStatus(){
+  setStatus('');
+}
+
+document.querySelectorAll('.event-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    document.querySelectorAll('.event-card').forEach(c=>c.classList.remove('selected'));
+    card.classList.add('selected');
+    selectedEvent = card.dataset.val;
+    resetStatus();
+  });
+});
+
+window.goStep = function goStep(n){
+  if(n===2 && !selectedEvent){
+    alert('Please choose an event type first.');
+    return;
+  }
+  document.querySelectorAll('.step-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('step'+n).classList.add('active');
+  for(let i=1;i<=3;i++){
+    const pip=document.getElementById('pip'+i);
+    pip.classList.remove('active','done');
+    if(i===n) pip.classList.add('active');
+    if(i<n) pip.classList.add('done');
+  }
+  resetStatus();
+  document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
+};
+
+function collectBooking(){
+  return {
+    submitted_at: new Date().toISOString(),
+    event_type: selectedEvent,
+    first_name: document.getElementById('fname').value.trim(),
+    last_name: document.getElementById('lname').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    event_date: document.getElementById('edate').value || null,
+    guest_count: document.getElementById('guests').value ? Number(document.getElementById('guests').value) : null,
+    city: document.getElementById('city').value,
+    vibe: document.getElementById('vibe').value,
+    budget: document.getElementById('budget').value,
+    notes: document.getElementById('notes').value.trim()
+  };
+}
+
+function validateBooking(booking){
+  if(!booking.event_type) return { ok:false, message:'Please choose an event type first.', step:1 };
+  if(!booking.first_name || !booking.email) return { ok:false, message:'Please fill in at least your first name and email.', step:2 };
+  return { ok:true };
+}
+
+async function saveBookingToSupabase(booking){
+  const client = getSupabaseClient();
+  if(!client) return { saved:false, mode:'local-only' };
+
+  const payload = {
+    ...booking,
+    status: 'new',
+    source: 'website'
+  };
+
+  const { error } = await client.from(SUPABASE_CONFIG.table).insert(payload);
+  if(error) throw error;
+  return { saved:true, mode:'supabase' };
+}
+
+window.submitBooking = async function submitBooking(){
+  const booking = collectBooking();
+  const validation = validateBooking(booking);
+
+  if(!validation.ok){
+    setStatus(validation.message, 'error');
+    goStep(validation.step);
+    return;
+  }
+
+  submitBtn.disabled = true;
+  setStatus('Sending your request...', '');
+
+  const localBackup = {
+    id: Date.now(),
+    ...booking,
+    submitted: new Date().toLocaleString()
+  };
+
+  try{
+    saveBookingLocal(localBackup);
+    const result = await saveBookingToSupabase(booking);
+    setStatus(
+      result.mode === 'supabase'
+        ? 'Request sent successfully.'
+        : 'Saved locally for now. Add your Supabase keys to start collecting live submissions.',
+      'success'
+    );
+    showConfirm();
+  }catch(error){
+    console.error('Booking submission failed:', error);
+    setStatus('Your request was saved locally, but the live database connection needs attention.', 'error');
+    showConfirm();
+  }finally{
+    submitBtn.disabled = false;
+  }
+};
+
+function showConfirm(){
+  const el=document.getElementById('confirm');
+  el.classList.add('show');
+  document.body.style.overflow='hidden';
+  spawnParticles();
+}
+
+window.closeConfirm = function closeConfirm(){
+  document.getElementById('confirm').classList.remove('show');
+  document.body.style.overflow='';
+  goStep(1);
+  selectedEvent='';
+  resetStatus();
+  document.querySelectorAll('.event-card').forEach(c=>c.classList.remove('selected'));
+  document.querySelectorAll('input,textarea').forEach(i=>i.value='');
+  document.querySelectorAll('select').forEach(s=>s.selectedIndex=0);
+};
+
+function spawnParticles(){
+  const el=document.getElementById('confirm');
+  for(let i=0;i<20;i++){
+    const p=document.createElement('div');
+    p.classList.add('particle');
+    const size=Math.random()*6+3;
+    p.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;bottom:0;animation-duration:${Math.random()*3+2.5}s;animation-delay:${Math.random()*2}s;background:${Math.random()>.5?'var(--red)':'var(--amber)'};`;
+    el.appendChild(p);
+    setTimeout(()=>p.remove(),6000);
+  }
+}
+
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('on');
+      io.unobserve(e.target);
     }
-    animRing();
+  });
+},{threshold:.1});
 
-    document.querySelectorAll('a, button, .service-card, .loc-card').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
-        ring.style.opacity = '0';
-      });
-      el.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
-        ring.style.opacity = '1';
-      });
-    });
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-    // ── Scroll reveal
-    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: .12 });
-    revealEls.forEach(el => io.observe(el));
+window.viewBookings=function(){
+  const b=getBookings();
+  if(!b.length){
+    console.log('No bookings yet.');
+    return;
+  }
+  console.table(b);
+  console.log('\nFull data:\n',JSON.stringify(b,null,2));
+};
 
-    // ── Form submit feedback
-    document.querySelector('.form-submit').addEventListener('click', function() {
-      this.textContent = '✓ Request Sent!';
-      this.style.background = '#1a6b2a';
-      setTimeout(() => {
-        this.textContent = 'Send Booking Request →';
-        this.style.background = '';
-      }, 3000);
-    });
-  </script>
+window.supabaseSetupHelp = function supabaseSetupHelp(){
+  console.log(`1. Create a table named "${SUPABASE_CONFIG.table}" in Supabase.
+2. Add columns that match the booking payload fields:
+   submitted_at, event_type, first_name, last_name, email, phone,
+   event_date, guest_count, city, vibe, budget, notes, status, source
+3. Replace SUPABASE_CONFIG.url and SUPABASE_CONFIG.anonKey in this file.
+4. Enable an insert policy for anonymous users if you're using Row Level Security.`);
+};
+</script>
 </body>
 </html>
