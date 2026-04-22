@@ -731,8 +731,8 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 const STORAGE_KEY = 'bm_bookings';
 const SUPABASE_CONFIG = {
-  url: 'YOUR_SUPABASE_URL',
-  anonKey: 'YOUR_SUPABASE_ANON_KEY',
+  url: 'https://mcuswctumkazxdrcgzfq.supabase.co',
+  anonKey:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1jdXN3Y3R1bWthenhkcmNnemZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4MzMyMzUsImV4cCI6MjA5MjQwOTIzNX0.gDXVTmGAvvS8tWyXbENcOHn-N_aAe3NJcBL97tFGwxM',
   table: 'booking_requests'
 };
 
